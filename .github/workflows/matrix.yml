@@ -6,6 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
+  
   #   branches: [ "main" ]
   # pull_request:
   #   branches: [ "main" ]
@@ -18,16 +19,21 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     strategy:
+      fail-fast: false
+      max-parallel: 2
       matrix:
         OS: [ubuntu-latest, ubuntu-20.04, windows-latest]
         images: [hello-world, alpine]
+        
+        exclude:
+         - images: alpine
+           os:  windows-latest
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-
-
+      
       # Runs a single command using the runners shell
       - name: Echo docker details
         run: docker info
@@ -35,3 +41,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run Image on ${{ matrix.os }}
         run: docker run ${{ matrix.images }}
+        
