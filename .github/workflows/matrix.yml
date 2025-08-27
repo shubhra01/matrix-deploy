@@ -34,4 +34,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run Image on ${{ matrix.os }}
-        run: docker run {{ matrix.images }}
+        run: docker run ${{ matrix.images }}
