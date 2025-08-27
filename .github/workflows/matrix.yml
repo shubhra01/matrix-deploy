@@ -23,10 +23,10 @@ jobs:
       max-parallel: 2
       matrix:
         OS: [ubuntu-latest, ubuntu-20.04, windows-latest]
-        images: [hello-world, alpine]
+        images: [hello-world, amd64/alpine]
         
         exclude:
-         - images: alpine
+         - images: amd64/alpine
            os:  windows-latest
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
